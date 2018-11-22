@@ -4,33 +4,68 @@ package com.vishnuh.myapp;
 import com.google.gson.annotations.SerializedName;
 
 public class RestAPI {
+
+    private String featured_image;
+
     @SerializedName("City")
     private String city;
+
+    private String Image;
 
     @SerializedName("Address")
     private String address;
 
-    @SerializedName("Restaurent Name")
-    private String restaurent_name;
+    @SerializedName("Restaurant Name")
+    private String restaurant_name;
 
     @SerializedName("Restaurant ID")
-    private String restaurent_id;
+    private String restaurant_id;
 
     @SerializedName("Locality Verbose")
     private String locality;
 
-    @SerializedName("Rating text")
-    private String rating;
+    @SerializedName("Aggregate rating")
+    private double rating;
 
-    public RestAPI(String city) {
-        city = city;
+    @SerializedName("Rating text")
+    private String ratingText;
+
+    private String Cuisines;
+
+    @SerializedName("Average Cost for two")
+    private int AvgCost;
+
+
+    public String getRatingText() {
+        return ratingText;
     }
 
-    public RestAPI(String city, String restaurent_name, String address, String rating) {
-        city = city;
-        restaurent_name = restaurent_name;
-        address = address;
-        rating = rating;
+    public void setRatingText(String ratingText) {
+        this.ratingText = ratingText;
+    }
+
+    public String getFeatured_image() {
+        return featured_image;
+    }
+
+    public void setFeatured_image(String featured_image) {
+        this.featured_image = featured_image;
+    }
+
+    public String getCuisines() {
+        return Cuisines;
+    }
+
+    public void setCuisines(String cuisines) {
+        Cuisines = cuisines;
+    }
+
+    public int getAvgCost() {
+        return AvgCost;
+    }
+
+    public void setAvgCost(int avgCost) {
+        AvgCost = avgCost;
     }
 
     public String getCity() {
@@ -41,6 +76,14 @@ public class RestAPI {
         this.city = city;
     }
 
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        Image = image;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -49,20 +92,20 @@ public class RestAPI {
         this.address = address;
     }
 
-    public String getRestaurent_name() {
-        return restaurent_name;
+    public String getRestaurant_name() {
+        return restaurant_name;
     }
 
-    public void setRestaurent_name(String restaurent_name) {
-        this.restaurent_name = restaurent_name;
+    public void setRestaurant_name(String restaurant_name) {
+        this.restaurant_name = restaurant_name;
     }
 
-    public String getRestaurent_id() {
-        return restaurent_id;
+    public String getRestaurant_id() {
+        return restaurant_id;
     }
 
-    public void setRestaurent_id(String restaurent_id) {
-        this.restaurent_id = restaurent_id;
+    public void setRestaurant_id(String restaurant_id) {
+        this.restaurant_id = restaurant_id;
     }
 
     public String getLocality() {
@@ -73,11 +116,11 @@ public class RestAPI {
         this.locality = locality;
     }
 
-    public String getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 

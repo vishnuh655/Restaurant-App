@@ -1,6 +1,7 @@
 package com.vishnuh.myapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -22,11 +23,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private static final String TAG = "RecyclerViewAdapter";
     private ArrayList<String> mImageNames = new ArrayList<>();
     private ArrayList<String> mImages = new ArrayList<>();
+    private ArrayList<String> mAddress = new ArrayList<>();
+    private ArrayList<String> mRestNum = new ArrayList<>();
+
+
     private Context mContext;
 
-    public RecyclerViewAdapter(Context mContext, ArrayList<String> mImageNames, ArrayList<String> mImages) {
+    public RecyclerViewAdapter(Context mContext, ArrayList<String> mImageNames, ArrayList<String> mImages, ArrayList<String> mAddress, ArrayList<String> mRestNum) {
         this.mImageNames = mImageNames;
         this.mImages = mImages;
+        this.mRestNum = mRestNum;
+        this.mAddress = mAddress;
         this.mContext = mContext;
     }
 
@@ -40,17 +47,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         Log.d(TAG, "onBindViewHolder: called");
 
         Glide.with(mContext).asBitmap().load(mImages.get(i)).into(viewHolder.image);
 
         viewHolder.imageName.setText(mImageNames.get(i));
+        viewHolder.addressText.setText(mAddress.get(i));
+        viewHolder.restId.setText(mRestNum.get(i));
         viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Log.d(TAG, "onClick: list item clicked" + mImageNames.get(i));
-                Toast.makeText(mContext, "List Item Clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, mImageNames.get(i) + " Clicked " + mRestNum.get(i), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(mContext, DetailActivity.class);
+                intent.putExtra("RestId", mRestNum.get(i));
+                mContext.startActivity(intent);
             }
         });
 
@@ -65,6 +77,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         CircleImageView image;
         TextView imageName;
+        TextView addressText;
+        TextView restId;
         ConstraintLayout parentLayout;
 
 
@@ -72,6 +86,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(itemView);
             image = itemView.findViewById(R.id.circleImage);
             imageName = itemView.findViewById(R.id.textName_item);
+            addressText = itemView.findViewById(R.id.textAddr_item);
+            restId = itemView.findViewById(R.id.restId);
             parentLayout = itemView.findViewById(R.id.parent_layout);
 
         }
